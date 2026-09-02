@@ -469,24 +469,21 @@
     align-items:center;
   }
   .about-portrait{
-    aspect-ratio:1;
-    border-radius:50%;
+    width:100%;
+    aspect-ratio:4/3;
+    border-radius:var(--radius-m);
+    overflow:hidden;
     background:
       radial-gradient(circle at 30% 28%, rgba(218,165,32,0.18), transparent 60%),
       linear-gradient(135deg, var(--leaf), var(--leaf-soft));
     border:1px solid rgba(196,160,82,0.35);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:30px;
-    text-align:center;
+    box-shadow:0 20px 48px rgba(0,0,0,0.35);
   }
-  .about-portrait span{
-    font-family:var(--font-quote);
-    font-style:italic;
-    color:var(--gold);
-    font-size:0.95rem;
-    line-height:1.5;
+  .about-portrait img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
   }
   .about-copy h2{
     font-size:clamp(1.8rem, 3vw, 2.4rem);
@@ -760,7 +757,7 @@
     .lead-grid{ grid-template-columns:1fr; gap:52px; }
     .product-grid{ grid-template-columns:1fr 1fr; }
     .about-grid{ grid-template-columns:1fr; gap:36px; text-align:left; }
-    .about-portrait{ max-width:220px; margin:0 auto; }
+    .about-portrait{ max-width:100%; }
   }
 
   @media (max-width: 620px){
@@ -814,14 +811,14 @@
   </section>
 
   <!-- ================= ABOUT =================
-       TODO: swap the placeholder circle below for a real photo
-       (e.g. <img src="resources/about/portrait.jpg" alt="..."> once
-       you've uploaded one to your repo), and edit the copy to tell
-       your own story in your own words. -->
+       Brand image lives at resources/about/The Abundance Within.jpeg.
+       Upload that exact file to your repo at that path (folder name and
+       filename must match exactly, including capitalization) or change
+       the src below to wherever you actually put it. -->
   <section class="about" id="about">
     <div class="wrap about-grid">
-      <div class="about-portrait" aria-hidden="true">
-        <span>Your photo here<br>(swap this circle for a real image)</span>
+      <div class="about-portrait">
+        <img src="resources/about/The Abundance Within.jpeg" alt="The Abundance Within brand image">
       </div>
       <div class="about-copy">
         <h2>The story behind The Abundance Within</h2>
@@ -862,7 +859,6 @@
 
         <form id="contactForm" action="https://formspree.io/f/mljebbak" method="POST">
           <input type="hidden" name="_subject" value="New TAWU request — The Abundance Within">
-          <input type="hidden" name="_replyto" value="">
           <div class="field">
             <label for="fullname">Full Name</label>
             <input type="text" id="fullname" name="fullname" placeholder="Jane Wanjiru" required>
@@ -1120,9 +1116,6 @@
   // and falls back to a normal form submission, which works either way.
   function handleContactSubmit(e){
     e.preventDefault();
-    var replyToField = contactForm.querySelector('input[name="_replyto"]');
-    var emailField = document.getElementById('email');
-    if (replyToField && emailField) { replyToField.value = emailField.value; }
     var data = new FormData(contactForm);
 
     formStatus.className = 'form-status';
