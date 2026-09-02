@@ -110,6 +110,7 @@
     box-shadow:0 8px 24px rgba(196,160,82,0.28);
   }
   .btn-gold:hover{ transform:translateY(-2px); box-shadow:0 14px 30px rgba(196,160,82,0.4); }
+  .btn-gold:disabled{ opacity:0.6; cursor:not-allowed; transform:none; }
   .btn-ghost{
     background:transparent;
     color:var(--cream);
@@ -355,6 +356,18 @@
     font-size:0.95rem;
     color:var(--ink);
     transition:border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .field input[type="file"]{
+    padding:10px 12px;
+    background:#fbfcf9;
+    font-size:0.85rem;
+  }
+  .field .field-hint{
+    display:block;
+    font-size:0.76rem;
+    font-weight:400;
+    color:#7a8571;
+    margin-top:6px;
   }
   .field textarea{ resize:vertical; min-height:96px; }
   .field input:focus,
@@ -860,9 +873,15 @@
         <h3>Claim your copy</h3>
         <p class="form-note">Enter your details below and we'll send TAWU directly to you.</p>
 
-        <form id="contactForm" action="https://formspree.io/f/xbdenvdw" method="POST">
+        <!-- Formspree form: endpoint + multipart/form-data + file field,
+             matching the exact Formspree snippet provided. -->
+        <form
+          id="contactForm"
+          action="https://formspree.io/f/mljebbak"
+          method="POST"
+          enctype="multipart/form-data"
+        >
           <input type="hidden" name="_subject" value="New TAWU request — The Abundance Within">
-          <input type="hidden" name="_replyto" value="">
           <div class="field">
             <label for="fullname">Full Name</label>
             <input type="text" id="fullname" name="fullname" placeholder="Jane Wanjiru" required>
@@ -878,6 +897,12 @@
           <div class="field">
             <label for="message">Short Message / Intent</label>
             <textarea id="message" name="message" placeholder="What are you hoping to shift or invite in right now?"></textarea>
+          </div>
+          <div class="field">
+            <label for="upload">Attach a file (optional)
+              <input type="file" id="upload" name="upload">
+              <span class="field-hint">Screenshot, receipt, or anything relevant — not required.</span>
+            </label>
           </div>
           <button type="submit" class="btn btn-gold btn-block" id="formSubmitBtn">Claim Your Free Guide Now</button>
           <p class="form-status" id="formStatus" role="status"></p>
@@ -1106,7 +1131,7 @@
 (function(){
   "use strict";
 
-  /* ---------- Lead magnet form (Formspree AJAX) ---------- */
+  /* ---------- Lead magnet form (Formspree AJAX, multipart/file-safe) ---------- */
   var contactForm = document.getElementById('contactForm');
   var formStatus  = document.getElementById('formStatus');
   var submitBtn   = document.getElementById('formSubmitBtn');
@@ -1118,11 +1143,14 @@
   // below in most browsers; it only works once the page is served over
   // http(s), e.g. from GitHub Pages. The handler below detects that case
   // and falls back to a normal form submission, which works either way.
+  //
+  // Because the form uses enctype="multipart/form-data" (needed for the
+  // file upload field), we build the FormData straight from the form and
+  // let the browser set the multipart boundary itself — never set a
+  // Content-Type header manually on a FormData fetch, or the boundary
+  // breaks and Formspree will reject the upload.
   function handleContactSubmit(e){
     e.preventDefault();
-    var replyToField = contactForm.querySelector('input[name="_replyto"]');
-    var emailField = document.getElementById('email');
-    if (replyToField && emailField) { replyToField.value = emailField.value; }
     var data = new FormData(contactForm);
 
     formStatus.className = 'form-status';
