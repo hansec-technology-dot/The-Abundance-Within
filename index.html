@@ -553,6 +553,14 @@
     color:var(--cream);
     margin:0 0 6px;
   }
+  .resource-item h4 a{
+    color:var(--cream);
+    transition:color 0.2s ease;
+  }
+  .resource-item h4 a:hover{
+    color:var(--gold-bright);
+    text-decoration:underline;
+  }
   .resource-item p{
     font-size:0.85rem;
     color:var(--cream-dim);
@@ -569,6 +577,23 @@
     color:var(--gold-bright);
   }
   .resource-item .dl-link:hover{ text-decoration:underline; }
+
+  .video-wrap{
+    position:relative;
+    width:100%;
+    padding-bottom:56.25%; /* 16:9 */
+    height:0;
+    overflow:hidden;
+    border-radius:var(--radius-s);
+    margin-top:4px;
+  }
+  .video-wrap iframe{
+    position:absolute;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    border:0;
+  }
 
   .resource-purchase{ max-width:380px; }
   .resource-purchase .product-card{ padding:32px 28px 28px; }
@@ -897,11 +922,10 @@
       <div class="resource-library">
         <div class="resource-item">
           <span class="badge">Free preview</span>
-          <h4>Day 1 — Morning Abundance Reset</h4>
-          <p>A short sample from the full 30-day affirmation pack.</p>
-          <audio controls preload="none" src="resources/affirmations/day-01-preview.mp3">
-            Your browser does not support audio playback.
-          </audio>
+          <h4>Stop Chasing, Start Choosing</h4>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/H1l-Jzt1GIA" title="Stop Chasing, Start Choosing" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
         </div>
         <div class="resource-item">
           <span class="badge">Free preview</span>
@@ -940,19 +964,17 @@
       <div class="resource-library">
         <div class="resource-item">
           <span class="badge">Free preview</span>
-          <h4>Session 1 — Grounding Breath</h4>
-          <p>A short excerpt from the guided meditation series.</p>
-          <audio controls preload="none" src="resources/meditations/session-01-preview.mp3">
-            Your browser does not support audio playback.
-          </audio>
+          <h4><a href="https://www.youtube.com/watch?v=OZvpjl4IgzQ" target="_blank" rel="noopener">432Hz Morning Alignment: The Ultimate Protocol for Wealth, Health, and Love</a></h4>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/OZvpjl4IgzQ" title="432Hz Morning Alignment: The Ultimate Protocol for Wealth, Health, and Love" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
         </div>
         <div class="resource-item">
           <span class="badge">Free preview</span>
-          <h4>Session 4 — Release &amp; Restore</h4>
-          <p>A second excerpt from later in the series.</p>
-          <audio controls preload="none" src="resources/meditations/session-04-preview.mp3">
-            Your browser does not support audio playback.
-          </audio>
+          <h4><a href="https://www.youtube.com/watch?v=-nxe_IZkXBE" target="_blank" rel="noopener">Rewrite Your Financial Story This August!</a></h4>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/-nxe_IZkXBE" title="Rewrite Your Financial Story This August!" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
         </div>
       </div>
 
